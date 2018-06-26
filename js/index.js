@@ -3,8 +3,12 @@ var output = document.getElementById("output");
 var score = document.getElementById("score");
 var startButton = document.querySelector(".start-button");
 // var computerNumber;
-var currentRound = 0;
-var rounds;
+var params = {
+    currentRound: 0,
+    rounds: 0
+};
+//var currentRound = 0;
+//var rounds;
 var countRounds = document.getElementById("rounds");
 //var rock = document.getElementById("rock");
 //rock.addEventListener("click", function () {
@@ -46,13 +50,13 @@ var computerScore = 0;
 // var playerNumber;
 
 function playerMove(playerDecision) {
-    currentRound++;
+    params.currentRound++;
     countRounds = document.getElementById("rounds");
     countRounds.innerHTML =
         "Round number: " +
-        currentRound +
+        params.currentRound +
         " End game when someone reach points: " +
-        rounds;
+        params.rounds;
 
     var computerDecision = Math.floor(Math.random() * 3 + 1);
     if (computerDecision == 1) {
@@ -92,10 +96,10 @@ function playerMove(playerDecision) {
         score.innerHTML = playerScore + " : " + computerScore;
     }
 
-    if (rounds == playerScore) {
+    if (params.rounds == playerScore) {
         var winner = "you";
     }
-    if (rounds == computerScore) {
+    if (params.rounds == computerScore) {
         var winner = "computer";
     }
     if (winner != null) {
@@ -109,14 +113,14 @@ function playerMove(playerDecision) {
 }
 
 startButton.addEventListener("click", function () {
-    rounds = window.prompt("How many rounds do you want to play?");
-    if (isFinite(rounds) && rounds > 0) {
-        currentRound = 0;
+    params.rounds = window.prompt("How many rounds do you want to play?");
+    if (isFinite(params.rounds) && params.rounds > 0) {
+        params.currentRound = 0;
         playerScore = 0;
         computerScore = 0;
 
         countRounds.innerHTML =
-            "Game started. You will win when you reach " + rounds + " points";
+            "Game started. You will win when you reach " + params.rounds + " points";
         startGame();
     }
 });
