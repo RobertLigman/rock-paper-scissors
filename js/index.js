@@ -2,11 +2,13 @@
 var output = document.getElementById("output");
 var score = document.getElementById("score");
 var startButton = document.querySelector(".start-button");
+
 // var computerNumber;
 var params = {
     currentRound: 0,
     rounds: 0
 };
+
 //var currentRound = 0;
 //var rounds;
 var countRounds = document.getElementById("rounds");
@@ -103,13 +105,23 @@ function playerMove(playerDecision) {
         var winner = "computer";
     }
     if (winner != null) {
-        output.innerHTML = winner + " won the entire game";
+        var overlay = document.querySelector('.overlay-modal');
+        var modal = document.querySelector('.modal');
+        overlay.classList.add('show');
+        overlay.addEventListener('click', function () {
+            overlay.classList.remove('show');
+        })
+        modal.classList.add('show');
+        console.log(modal.children);
+        var h1 = document.querySelector('.modal h1');
+        h1.innerHTML = winner + " won the entire game";
         score.innerHTML = "";
         countRounds.innerHTML = "";
         playerScore = 0;
         computerScore = 0;
         winner = null;
     }
+
 }
 
 startButton.addEventListener("click", function () {
